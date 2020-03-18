@@ -13,7 +13,7 @@
 			<!-- 투표하기 -->
 			<li><a href="polllist.do" title="투표">투표</a></li>
 			<!-- 채팅 -->
-			
+			<li><a href="chatting.do" title="채팅">채팅</a></li>
 			<!-- Youtube -->
 			
 			

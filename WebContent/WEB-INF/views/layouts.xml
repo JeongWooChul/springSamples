@@ -102,6 +102,12 @@
 
 
 
+<!-- 채팅 -->
+<definition name="chatting.tiles" extends="bbslist.tiles">	
+	<put-attribute name="main" value="/WEB-INF/views/webchat/chatting.jsp"/>
+</definition> 
+
+
 <definition name="sessionOut.tiles" extends="calendar.tiles">
 	<put-attribute name="main" value="/WEB-INF/views/login/SessionOut.jsp"/>
 </definition>
