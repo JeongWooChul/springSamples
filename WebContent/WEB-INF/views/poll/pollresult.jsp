@@ -5,6 +5,7 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <%
 List<PollSubDto> list = (List<PollSubDto>)request.getAttribute("pollsublist");
@@ -76,39 +77,57 @@ request.setAttribute("jsonData", jsonData);
 
 
 <script type="text/javascript">
+
+
 Highcharts.chart('container', {
     chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
+        type: 'column'
     },
     title: {
-        text: '투표 통계 결과'
+        text: '좋아하는 과일은??'
     },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    subtitle: {
+        text: '추가 링크: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
     },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+    xAxis: {
+        type: 'category',
+        labels: {
+            rotation: -45,
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
             }
         }
     },
+    yAxis: {
+        min: 0,
+        title: {
+            text: '투표수 (표)'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: 'Poll Count: <b>{point.y:.1f} 표</b>'
+    },
     series: [{
-        name: 'Brands',
-        colorByPoint: true,
-        data: <%=request.getAttribute("jsonData") %>
+        name: 'Population',
+        data: <%=request.getAttribute("jsonData") %>,
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            format: '{point.y:.1f}', // one decimal
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
     }]
 });
+
 
 </script >
