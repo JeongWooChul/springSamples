@@ -49,8 +49,25 @@ FROM POLLSUB
 WHERE POLLID=#{pollid}
 </select>
 
+<!-- 투표자등록 voter-->
+<insert id="pollingVoter" parameterType="bit.com.a.model.Voter">
+INSERT INTO VOTER(VOTERID, POLLID, POLLSUBID, ID, REGDATE)
+VALUES(VOTER_SEQ.NEXTVAL, #{pollid}, #{pollsubid}, #{id}, SYSDATE)
+</insert>
 
+<!-- 어느 투표 질문에 투표를 몇명? -->
+<update id="pollingPoll" parameterType="bit.com.a.model.Voter">
+UPDATE POLL
+SET POLLTOTAL=POLLTOTAL+1
+WHERE POLLID=#{pollid}
+</update>
 
+<!-- 어느 보기에 투표를 했는지? -->
+<update id="pollingSub" parameterType="bit.com.a.model.Voter">
+UPDATE POLLSUB
+SET ACOUNT=ACOUNT+1
+WHERE POLLID=#{pollid} AND POLLSUBID=#{pollsubid}
+</update>
 
 
 

@@ -76,6 +76,13 @@ public class BitPollServiceImpl implements BitPollService {
 	public List<PollSubDto> getPollSubList(PollDto poll) {
 		return pollDao.getPollSubList(poll);
 	}
+
+	@Override
+	public void polling(Voter voter) {
+		pollDao.pollingVoter(voter);
+		pollDao.pollingPoll(voter);
+		pollDao.pollingSub(voter);
+	}
 	
 	
 	

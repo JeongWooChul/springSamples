@@ -17,4 +17,8 @@ public interface BitPollDao {
 	public PollDto getPoll(PollDto poll);
 	public List<PollSubDto> getPollSubList(PollDto poll);
 	
+	public void pollingVoter(Voter voter);
+	public void pollingPoll(Voter voter);
+	public void pollingSub(Voter voter);
+	
 }

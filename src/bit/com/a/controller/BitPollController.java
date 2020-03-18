@@ -14,6 +14,7 @@ import bit.com.a.model.MemberDto;
 import bit.com.a.model.PollBean;
 import bit.com.a.model.PollDto;
 import bit.com.a.model.PollSubDto;
+import bit.com.a.model.Voter;
 import bit.com.a.service.BitPollService;
 
 /*
@@ -26,7 +27,7 @@ import bit.com.a.service.BitPollService;
 public class BitPollController {
 	
 	@Autowired
-	BitPollService pollService;
+	BitPollService service;
 	
 	@RequestMapping(value = "polllist.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String polllist(Model model, HttpServletRequest req) {
@@ -34,7 +35,7 @@ public class BitPollController {
 		
 		String id = ((MemberDto)req.getSession().getAttribute("login")).getId();
 		
-		List<PollDto> list = pollService.getPollAllList(id);
+		List<PollDto> list = service.getPollAllList(id);
 		model.addAttribute("plists", list);
 		
 		return "polllist.tiles";
@@ -53,7 +54,7 @@ public class BitPollController {
 	public String pollmakeAf(PollBean pbean) {
 		
 		System.out.println(pbean.toString());
-		pollService.makePoll(pbean);
+		service.makePoll(pbean);
 		
 		return "redirect:/polllist.do";
 	}
@@ -62,8 +63,8 @@ public class BitPollController {
 	public String polldetail(PollDto poll, Model model) {
 		model.addAttribute("doc_title", "투표 내용");
 		
-		PollDto dto = pollService.getPoll(poll);
-		List<PollSubDto> list = pollService.getPollSubList(poll);
+		PollDto dto = service.getPoll(poll);
+		List<PollSubDto> list = service.getPollSubList(poll);
 		
 		model.addAttribute("poll", dto);	// 질문
 		model.addAttribute("pollsublist", list);
@@ -71,9 +72,24 @@ public class BitPollController {
 		return "polldetail.tiles";
 	}
 	
+	@RequestMapping(value = "polling.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String polling(Voter voter) {
+		service.polling(voter);
+		
+		return "redirect:/polllist.do";
+	}
 	
-	
-	
-	
+	@RequestMapping(value = "pollresult.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String pollresult(PollDto poll, Model model) {
+		model.addAttribute("doc_title", "투표 결과");
+		
+		PollDto dto = service.getPoll(poll);	// PollTotal
+		List<PollSubDto> list = service.getPollSubList(poll);	// acount
+		
+		model.addAttribute("poll", dto);
+		model.addAttribute("pollsublist", list);
+
+		return "pollresult.tiles";
+	}
 	
 }

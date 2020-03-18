@@ -96,6 +96,9 @@
 	<put-attribute name="main" value="/WEB-INF/views/poll/polldetail.jsp"/>
 </definition>
 
+<definition name="pollresult.tiles" extends="polllist.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/poll/pollresult.jsp"/>
+</definition>
 
 
 
