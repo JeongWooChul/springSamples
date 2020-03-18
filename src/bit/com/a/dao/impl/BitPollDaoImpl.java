@@ -38,6 +38,16 @@ public class BitPollDaoImpl implements BitPollDao {
 	public void makePollSub(PollSubDto pollsub) {
 		sqlSession.insert(ns+"makePollSub", pollsub);
 	}
+
+	@Override
+	public PollDto getPoll(PollDto poll) {
+		return sqlSession.selectOne(ns + "getPoll", poll);
+	}
+
+	@Override
+	public List<PollSubDto> getPollSubList(PollDto poll) {
+		return sqlSession.selectList(ns + "getPollSubList", poll);
+	}
 	
 	
 }

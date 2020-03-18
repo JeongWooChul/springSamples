@@ -64,14 +64,17 @@ public class BitPollServiceImpl implements BitPollService {
 			pollsub.setAnswer(answer[i]);
 			
 			pollDao.makePollSub(pollsub);
-			
-			
-			
-			
 		}
-		
-		
-		
+	}
+
+	@Override
+	public PollDto getPoll(PollDto poll) {
+		return pollDao.getPoll(poll);
+	}
+
+	@Override
+	public List<PollSubDto> getPollSubList(PollDto poll) {
+		return pollDao.getPollSubList(poll);
 	}
 	
 	

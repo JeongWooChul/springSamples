@@ -67,6 +67,7 @@ List<PollDto> plists = (List<PollDto>)request.getAttribute("plists");
 <col width="300">
 <col width="100">
 <col width="100">
+<col width="100">
 <col width="50">
 <col width="50">
 <col width="100">
@@ -101,7 +102,7 @@ List<PollDto> plists = (List<PollDto>)request.getAttribute("plists");
 				} else {	// 투표 할 수 있음
 					%>
 					<td>
-						<a href="polldtail.do?pollid=<%=poll.getPollid() %>">
+						<a href="polldetail.do?pollid=<%=poll.getPollid() %>">
 							<%=poll.getQuestion() %>
 						</a>
 					</td>

@@ -34,5 +34,25 @@ VALUES(POLLSUB_SEQ.NEXTVAL, (SELECT NVL(MAX(POLLID), 0) FROM POLL), #{answer}, 0
 </insert>
 
 
+<!-- 투표하기 -->
+<!-- 투표질문 -->
+<select id="getPoll" parameterType="bit.com.a.model.PollDto" resultType="bit.com.a.model.PollDto">
+SELECT POLLID, ID, QUESTION, SDATE, EDATE, ITEMCOUNT, POLLTOTAL, REGDATE
+FROM POLL
+WHERE POLLID=#{pollid}
+</select>
+
+<!-- 투표세부 항목 -->
+<select id="getPollSubList" parameterType="bit.com.a.model.PollDto" resultType="bit.com.a.model.PollSubDto">
+SELECT POLLSUBID, POLLID, ANSWER, ACOUNT
+FROM POLLSUB
+WHERE POLLID=#{pollid}
+</select>
+
+
+
+
+
+
 
 </mapper>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import bit.com.a.model.MemberDto;
 import bit.com.a.model.PollBean;
 import bit.com.a.model.PollDto;
+import bit.com.a.model.PollSubDto;
 import bit.com.a.service.BitPollService;
 
 /*
@@ -57,8 +58,18 @@ public class BitPollController {
 		return "redirect:/polllist.do";
 	}
 	
-	
-	
+	@RequestMapping(value = "polldetail.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String polldetail(PollDto poll, Model model) {
+		model.addAttribute("doc_title", "투표 내용");
+		
+		PollDto dto = pollService.getPoll(poll);
+		List<PollSubDto> list = pollService.getPollSubList(poll);
+		
+		model.addAttribute("poll", dto);	// 질문
+		model.addAttribute("pollsublist", list);
+		
+		return "polldetail.tiles";
+	}
 	
 	
 	

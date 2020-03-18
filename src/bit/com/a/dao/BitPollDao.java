@@ -14,5 +14,7 @@ public interface BitPollDao {
 	public void makePoll(PollDto poll);
 	public void makePollSub(PollSubDto pollsub);
 	
+	public PollDto getPoll(PollDto poll);
+	public List<PollSubDto> getPollSubList(PollDto poll);
 	
 }
