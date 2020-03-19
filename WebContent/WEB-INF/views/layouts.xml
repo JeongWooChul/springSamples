@@ -108,6 +108,12 @@
 </definition> 
 
 
+<!-- Youtube -->
+<definition name="yutube.tiles" extends="bbslist.tiles">	
+	<put-attribute name="main" value="/WEB-INF/views/youtube/youlist.jsp"/>
+</definition>
+
+
 <definition name="sessionOut.tiles" extends="calendar.tiles">
 	<put-attribute name="main" value="/WEB-INF/views/login/SessionOut.jsp"/>
 </definition>
