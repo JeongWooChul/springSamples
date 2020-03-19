@@ -28,12 +28,71 @@
 	</iframe>
 </div>
 
+<table class="list_table" style="width: 85%">
+<colgroup>
+	<col style="width: 70px">
+	<col style="width: auto">
+	<col style="width: 100px">
+	<col style="width: 50px">
+</colgroup>
 
+<thead>
+	<tr>
+		<th>번호</th> <th>제목</th> <th>유튜브 고유번호</th> <th>저장</th>
+	</tr>
+</thead>
+
+<tbody>
+
+
+</tbody>
+<c:if test="${empty yulist }">
+<tr>
+	<td colspan="4">작성된 목록이 없습니다</td>
+</tr>
+</c:if>
+
+<c:forEach items="${yulist }" var="you" varStatus="vs">
+<tr class="_hover_tr">
+	<td>${vs.count }</td>
+	<td style="text-align: left;" id="_v${you.vname }ed2" onclick="getyoutube2('${you.vname}')">
+		<div class="c_vname" vname='${you.vname }'>${you.title }</div>
+	</td>
+	<td>${you.vname }</td>
+	<td onclick="getyoutube('${login.id}', '${you.vname }')">
+		<img alt="" src="image/save.png" class="ck_seq" vname='${you.vname }' id='_v${you.vname }ed' 
+			loginId='${login.id }' title="${you.title }" keyword='${empty s_keyword?"":s_keyword }'/>
+	<td>
+</tr>
+
+</c:forEach>
+
+</table>
 
 
 
 
 <script type="text/javascript">
+$(document).ready(function() {
+	$("#_youtube_").hide();
+	$("._hover_tr").mouseover(function(){
+		$(this).children().css("backgroundcolor", "#f0f5ff")
+	}).mouseout(function() {
+		$(this).children().css("backgroundcolor", "#ffffff")
+	});
+});
+
+$("#_btnSearch").click(function() {
+//	alert("_btnSearch");
+	$("#_frmForm").attr("action", "yutube.do").submit();
+})
+
+$(".c_vname").click(function() {
+	$("#_youtube_").show();
+	$("#_youtube").attr("src", "http://www.youtube.com/embed/" + $(this).attr("vname"));
+
+	
+});
 
 
 </script>

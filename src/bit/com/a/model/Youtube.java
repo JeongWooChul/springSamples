@@ -50,4 +50,18 @@ public class Youtube implements Serializable {
 	}
 	
 	
+	public String getVname() {
+		return toUrl(this.url);
+	}
+
+	public String toUrl(String msg) {
+		String tt = "";
+		if(msg.indexOf("=") == -1) {
+			tt = msg;
+		} else {
+			tt = msg.substring(msg.indexOf("=") + 1);
+		}
+		return tt;
+	}
+	
 }
