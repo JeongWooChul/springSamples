@@ -1,6 +1,9 @@
 package bit.com.a.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import bit.com.a.model.MemberDto;
 import bit.com.a.model.Youtube;
 import bit.com.a.model.YoutubeSave;
 import bit.com.a.service.BitYoutubeService;
@@ -45,6 +49,33 @@ public class BitYoutubeController {
 		YoutubeSave ysave = service.getYoutube(y);
 		
 		return ysave;
-	
 	}
+	
+	@RequestMapping(value = "youtubelist", method={RequestMethod.GET, RequestMethod.POST})
+	public String youtubelist(HttpServletRequest req, Model model) {
+		model.addAttribute("doc_title", "Youtube 목록");
+		
+		String id = ((MemberDto)req.getSession().getAttribute("login")).getId();
+		
+		YoutubeSave you = new YoutubeSave();
+		you.setId(id);
+		
+		List<YoutubeSave> getTitles = service.getYoutubeList(you);
+		
+		model.addAttribute("youlist", getTitles);
+		
+		return "youtubelist.tiles";		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "youtubedel.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String youtubedel(int seq) {
+		boolean b = service.youtubeDel(seq);		
+		if(b) {
+			return "YES";
+		}		
+		return "NO";
+	}
+	
 }

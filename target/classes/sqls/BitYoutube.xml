@@ -15,5 +15,19 @@ SELECT SEQ, VNAME, ID, TITLE, CATEGORY, WDATE
 FROM YOUTUBE
 WHERE ID=#{id} AND VNAME=#{vname}
 </select>
+
+<select id="getYoutubeList" parameterType="bit.com.a.model.YoutubeSave"	resultType="bit.com.a.model.YoutubeSave">
+SELECT SEQ, VNAME, ID, TITLE, CATEGORY, WDATE
+FROM YOUTUBE
+WHERE ID=#{id}
+ORDER BY WDATE DESC
+</select>
+
+<delete id="youtubedel" parameterType="java.lang.Integer">
+DELETE 
+FROM YOUTUBE
+WHERE SEQ=#{seq}
+</delete>
+
 </mapper>
 

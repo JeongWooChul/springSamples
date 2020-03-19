@@ -1,5 +1,7 @@
 package bit.com.a.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,17 @@ public class BitYoutubeServiceImpl implements BitYoutubeService {
 	public YoutubeSave getYoutube(YoutubeSave ys) {
 		return dao.getYoutube(ys);
 	}
+
+	@Override
+	public List<YoutubeSave> getYoutubeList(YoutubeSave ys) {		
+		return dao.getYoutubeList(ys);		
+	}
+
+	@Override
+	public boolean youtubeDel(int seq) {
+		return dao.youtubeDel(seq);		
+	}
+
 	
 	
 	
