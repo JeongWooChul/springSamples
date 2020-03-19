@@ -90,9 +90,30 @@ $("#_btnSearch").click(function() {
 $(".c_vname").click(function() {
 	$("#_youtube_").show();
 	$("#_youtube").attr("src", "http://www.youtube.com/embed/" + $(this).attr("vname"));
-
-	
 });
 
+
+$(".ck_seq").click(function() {
+//	alert("ck_seq");
+
+	var id = $(this).attr("loginId");
+	var vname = $(this).attr("vname");
+	var title = $(this).attr('title');
+	var category = $(this).attr("keyword");
+
+	$.ajax({
+		type:'post',
+		url:'./youtubesave.do',
+		async:true,
+		data:{"id":id, "vname":vname, "title":title, "category":category},
+		success:function(msg){
+			alert('success');
+			alert("성공적으로 " + msg.vname + "가 저장 되었습니다.")
+		}, 
+		error:function() {
+			alert('error');
+		}
+	});
+});
 
 </script>

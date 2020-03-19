@@ -20,6 +20,11 @@ public class BitYoutubeDaoImpl implements BitYoutubeDao {
 		int n = sqlSession.insert(ns+"writeYoutube", ys);
 		return n>0?true:false;
 	}
+
+	@Override
+	public YoutubeSave getYoutube(YoutubeSave ys) {
+		return sqlSession.selectOne(ns+"getYoutube", ys);
+	}
 	
 	
 	

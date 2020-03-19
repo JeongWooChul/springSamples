@@ -17,6 +17,11 @@ public class BitYoutubeServiceImpl implements BitYoutubeService {
 	public boolean writeYoutube(YoutubeSave ys) {
 		return dao.writeYoutube(ys);
 	}
+
+	@Override
+	public YoutubeSave getYoutube(YoutubeSave ys) {
+		return dao.getYoutube(ys);
+	}
 	
 	
 	

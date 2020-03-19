@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import bit.com.a.model.Youtube;
+import bit.com.a.model.YoutubeSave;
 import bit.com.a.service.BitYoutubeService;
 import bit.com.a.util.YoutubeParser;
 
@@ -36,5 +38,13 @@ public class BitYoutubeController {
 		return "yutube.tiles";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "youtubesave.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public YoutubeSave youtubesave(YoutubeSave y) {
+		service.writeYoutube(y);
+		YoutubeSave ysave = service.getYoutube(y);
+		
+		return ysave;
 	
+	}
 }
